@@ -7,6 +7,9 @@ const initialState = {
         employee_salary: '',
         email:'',
         phoneNo: '',
+        gender:'',
+        error:'',
+        city:''
     }
 }
 

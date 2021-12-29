@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AddEmp } from './component/AddEmp';
 import { Container, NavLink , Nav} from 'react-bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
+import 'antd/dist/antd.css';
 
 
 

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { requestData,requestDeleteEmp } from '../thunks/requestData'
+import { requestData, requestDeleteEmp } from '../thunks/requestData'
 import { Link } from 'react-router-dom'
-import { Table } from 'react-bootstrap'
+// import { Table } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import '../App.css'
+import { Table } from 'antd'
 
 export const Employee = () => {
     const dispatch = useDispatch()
     const empdata = useSelector(state => state.apiData.api)
-    const [popup, setPopup] = useState(false);
 
     const length = empdata.length
     console.log('vvv', empdata);
@@ -18,50 +18,81 @@ export const Employee = () => {
         dispatch(requestData())
     }, [])
 
-    const handleDelete=(id)=>{
-        setPopup(true);
-        dispatch(requestDeleteEmp(id))
+    const handleDelete = (id) => {
+        var result = window.confirm("Are you sure you want to delete this id");
+        if (result == true) {
+            dispatch(requestDeleteEmp(id))
+            alert('delete record successfully')
+        }
+
     }
+    empdata.map((item) => ({
+        Name: item.employee_name,
+        Salary: item.employee_salary,
+        Age: item.employee_age,
+        Email: item.email,
+        PhoneNo: item.phoneNo,
+        Gender: item.gender,
+        City: item.city,
+        Edit: item.id
+    }))
+
+    const columns = [
+        {
+            title: "employee name",
+            dataIndex: "employee_name",
+
+        },
+        {
+            title: "employee salary",
+            dataIndex: "employee_salary",
+
+        },
+        {
+            title: "employee age",
+            dataIndex: "employee_age"
+        },
+        {
+            title: " gender  ",
+            dataIndex: "gender",
+
+        },
+        {
+            title: " employee city ",
+            dataIndex: "city",
+
+        },
+        {
+            title: " employee email ",
+            dataIndex: "email",
+
+        },
+        {
+            title: " employee No. ",
+            dataIndex: "phoneNo",
+
+        },
+        {
+            title: " update employee ",
+            dataIndex: "id",
+            key: "key",
+            render: (item) => <Link className="btn btn-warning" to={'/edit/' + item}>update</Link>
+        },
+        {
+            title: "delete employee ",
+            dataIndex: "id",
+            key: "key",
+            render: (item) => <Link className="btn btn-danger" onClick={() => handleDelete(item)}>Delete</Link>
+        },
+    ];
 
     return (
         <>
-        {/* <Link className="btn btn-warning" to={'/add'}>add employee</Link><br /> <br /> */}
-       <h3 id="center"> total employee {length}</h3>
-            <Table striped bordered hover size="sm">
-                <thead className='thead-dark'>
-                    <tr className='table-dark'>
-                        <th>employee id</th><br />
-                        <th>employee name</th> <br />
-                        <th>employee salary</th><br />
-                        <th>employee age</th>
-                        <th>update employee </th>
-                        <th> employee email</th>
+            <h3 id="center"> Total Employee {length}</h3>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {empdata.map((item) => (
-                        <>
-                            <tr key={item.id}>
-                                <td>{item.id}</td><br />
-                                <td>{item.employee_name}</td> <br />
-                                <td>{item.employee_salary}</td><br />
-                                <td>{item.employee_age}</td>
-                                <td>{item.employee_age}</td>
-                                <td>{item.email}</td>
-                                <td>{item.phoneNo}</td>
-
-                                <Button variant="danger">
-                                    <Link className="btn btn-warning" to={`/edit/${item.id}/:id`} >update</Link>
-                                </Button>
-                                <Button>
-                                <Link className="btn btn-danger" varient="success" onClick={()=>handleDelete(item.id)}>Delete</Link>
-                                </Button>
-                            </tr>
-                        </>
-                    ))}
-                </tbody>
-            </Table>
+            <Table
+                columns={columns}
+                dataSource={empdata} />
         </>
     )
 }

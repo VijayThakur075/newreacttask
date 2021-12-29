@@ -1,0 +1,7 @@
+const count= hello
+for(int i=0,i<=count.lenght-1, i++){
+if (){
+    count= ++i,
+    break;
+}
+}
