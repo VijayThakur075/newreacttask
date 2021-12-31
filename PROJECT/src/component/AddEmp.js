@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { requestAddEmp } from '../thunks/requestData';
 import { useHistory } from 'react-router-dom';
 import { Form, Input, Select, Button, } from 'antd'
-import { Modal,  Spin} from 'antd';
+import { Modal } from 'antd';
 const { Option } = Select
 
 export const AddEmp = () => {
@@ -78,7 +78,6 @@ export const AddEmp = () => {
 
     return (
         <div>
-            
             <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <h3 id="center">Add Employee</h3>
                 <Form

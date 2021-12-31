@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { requestData, requestDeleteEmp } from '../thunks/requestData'
 import { Link } from 'react-router-dom'
 import '../App.css'
-import { Spin, Table } from 'antd'
+import { Table } from 'antd'
 
 export const Employee = () => {
     const dispatch = useDispatch()
@@ -91,7 +91,6 @@ export const Employee = () => {
 
     return (
         <>
-        <Spin></Spin>
             <h3 id="center"> Total Employee {length}</h3>
 
             <Table

@@ -7,7 +7,6 @@ import { AddEmp } from './component/AddEmp';
 import { Container, NavLink , Nav} from 'react-bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
 import 'antd/dist/antd.css';
-import { Login } from './component/Login';
 
 
 
@@ -19,15 +18,13 @@ function App() {
         <Navbar bg="dark" variant="dark">
           <Container>
             <Nav className="me-auto">
-            <NavLink  className='btn btn-dark' href='/login'>Login</NavLink><br /> <br />
               <NavLink  className='btn btn-dark' href='/employe'>employee</NavLink><br /> <br />
               <NavLink className="btn btn-dark" href='/add'>add employee</NavLink><br /> <br />
             </Nav>
           </Container>
         </Navbar>
 
-        <Route exact path='/login' component={Login} />
-        <Route  path='/employe' component={Employee} />
+        <Route exact path='/employe' component={Employee} />
         <Route path='/edit/:id' component={EditData} />
         <Route path='/add' component={AddEmp} />
 
